@@ -1,13 +1,25 @@
 import urllib3
 
-import requests
+try:
+	import requests
+except:
+	import os
+	os.system('pip install requests')
+	os.system('clear')
 import threading
-	
+import socket
 print('\033[1;33;40m------------[+] Status Code Checker By RC [+]----------\n')
-input('\033[1;37;40mEnter The File Name Which Contains The Subdomains \n\n\033[1;32;40mroot@rc #~ ')
+fname = input('\033[1;37;40mEnter The File Name Which Contains The Subdomains \n\n\033[1;32;40mroot@rc #~ ')
 def full(a):
 	http = urllib3.PoolManager()
-	f = open('domains.txt')
+	try:
+		f=open(fname)
+	except:
+		import os
+		os.system('clear')
+		print("\033[1;34;40m[+] File Not Found [+]")
+		quit
+	#f=open(fname)
 	for i in f:
 		pass
 		i = i.replace('\n','')
@@ -23,11 +35,18 @@ def full(a):
 				print(f'\033[1;32;40m;;{i} Redirected 301')
 			elif resp.status_code==404:
 				print(f'\033[1;31;40m{i} 404 Not Found')
+			elif resp.status_code==403:
+				print(f"\033[1;36;40m{i} 403 Forbidden/Redirecting")
+			elif resp.status_code==400:
+				print(f'\033[1;30;40m{i} 400 Bad Request')
 			else:
-				print("\033[1;34;40m" + i + " Unknown Status Code")
+				print(f"\033[1;34;40m{i} Status : {resp.status_code}")
 		except requests.ConnectionError:
 			print("\033[1;31;40m" + i + " 404 Not Found")
 o = [1]
-for i in o:
-	thread = threading.Thread(target=full,args=(1,))
-	thread.start()
+try:
+	for i in o:
+		thread = threading.Thread(target=full,args=(1,))
+		thread.start()
+except:
+	pass

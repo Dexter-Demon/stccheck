@@ -24,10 +24,6 @@ def full(a):
 		pass
 		i = i.replace('\n','')
 		try:
-			'''resp = http.request(
-			'GET',
-			i ,
-			headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',})'''
 			resp=requests.get(i)
 			if resp.status_code==200:
 				print(f'\033[1;33;40m{i}  200 OK')

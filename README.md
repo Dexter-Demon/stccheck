@@ -1,2 +1,2 @@
 # stccheck
-Samajh rahe ho 🤔
+Samajh rahe ho kya 🤔
